@@ -458,6 +458,16 @@
     }
     .footer-inner strong { color: #d9d5d0; font-weight: 500; }
     .footer-mark { color: #c9c4bd; font-family: var(--serif); font-size: 16px; letter-spacing: .08em; }
+    .validator-links {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-height: 60px;
+      border-top: 1px solid var(--line);
+    }
+    .validator-links a { display: inline-flex; align-items: center; }
+    .validator-links img { display: block; max-width: 88px; height: 31px; object-fit: contain; }
+    .validator-links a:first-child img { width: 31px; }
 
     @media (max-width: 760px) {
       .wrap { width: min(100% - 40px, 560px); }

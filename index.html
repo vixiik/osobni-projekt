@@ -234,6 +234,14 @@
       <span>Informační projekt · Tomáš Wanke · <span id="year"></span></span>
       <a href="https://www.chromehearts.com/" target="_blank" rel="noopener noreferrer">Oficiální web ↗</a>
     </div>
+    <div class="validator-links wrap" aria-label="Validace stránky">
+      <a id="html-validator" href="https://validator.w3.org/" target="_blank" rel="noopener noreferrer" aria-label="Ověřit HTML této stránky ve W3C Nu Html Checker">
+        <img src="https://www.w3.org/html/logo/downloads/HTML5_Logo_64.png" alt="HTML5 — ověřit stránku">
+      </a>
+      <a id="css-validator" href="https://jigsaw.w3.org/css-validator/" target="_blank" rel="noopener noreferrer" aria-label="Ověřit CSS této stránky ve W3C CSS Validatoru">
+        <img src="https://jigsaw.w3.org/css-validator/images/vcss" alt="Validní CSS — ověřit styly">
+      </a>
+    </div>
   </footer>
   <script>
     const menuButton = document.querySelector(".menu-toggle");
@@ -256,6 +264,21 @@
     });
 
     document.querySelector("#year").textContent = new Date().getFullYear();
+
+    const pageUrl = new URL(window.location.href);
+    pageUrl.hash = "";
+    const htmlDocumentUrl = pageUrl.protocol === "file:"
+      ? `data:text/html;charset=utf-8,${encodeURIComponent(document.documentElement.outerHTML)}`
+      : pageUrl.href;
+    const htmlValidatorUrl = new URL("https://validator.w3.org/nu/");
+    htmlValidatorUrl.searchParams.set("doc", htmlDocumentUrl);
+    document.querySelector("#html-validator").href = htmlValidatorUrl.href;
+
+    const stylesheet = document.querySelector('link[rel="stylesheet"]');
+    const cssValidatorUrl = new URL("https://jigsaw.w3.org/css-validator/validator");
+    cssValidatorUrl.searchParams.set("uri", new URL(stylesheet.href, pageUrl).href);
+    cssValidatorUrl.searchParams.set("profile", "css3");
+    document.querySelector("#css-validator").href = cssValidatorUrl.href;
   </script>
 </body>
 </html>
