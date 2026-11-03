@@ -267,18 +267,25 @@
 
     const pageUrl = new URL(window.location.href);
     pageUrl.hash = "";
-    const htmlDocumentUrl = pageUrl.protocol === "file:"
-      ? `data:text/html;charset=utf-8,${encodeURIComponent(document.documentElement.outerHTML)}`
-      : pageUrl.href;
-    const htmlValidatorUrl = new URL("https://validator.w3.org/nu/");
-    htmlValidatorUrl.searchParams.set("doc", htmlDocumentUrl);
-    document.querySelector("#html-validator").href = htmlValidatorUrl.href;
-
+    const isLocalFile = pageUrl.protocol === "file:";
+    const htmlValidatorLink = document.querySelector("#html-validator");
     const stylesheet = document.querySelector('link[rel="stylesheet"]');
     const cssValidatorUrl = new URL("https://jigsaw.w3.org/css-validator/validator");
-    cssValidatorUrl.searchParams.set("uri", new URL(stylesheet.href, pageUrl).href);
     cssValidatorUrl.searchParams.set("profile", "css3");
-    document.querySelector("#css-validator").href = cssValidatorUrl.href;
+    const cssValidatorLink = document.querySelector("#css-validator");
+
+    if (isLocalFile) {
+      htmlValidatorLink.href = "https://validator.w3.org/#validate_by_upload";
+      htmlValidatorLink.title = "Nahraj místní HTML soubor do validátoru.";
+      cssValidatorLink.href = "https://jigsaw.w3.org/css-validator/#validate_by_upload";
+      cssValidatorLink.title = "Nahraj místní CSS soubor do validátoru.";
+    } else {
+      const htmlValidatorUrl = new URL("https://validator.w3.org/nu/");
+      htmlValidatorUrl.searchParams.set("doc", pageUrl.href);
+      htmlValidatorLink.href = htmlValidatorUrl.href;
+      cssValidatorUrl.searchParams.set("uri", new URL(stylesheet.href, pageUrl).href);
+      cssValidatorLink.href = cssValidatorUrl.href;
+    }
   </script>
 </body>
 </html>
