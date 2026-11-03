@@ -458,25 +458,27 @@
     }
     .footer-inner strong { color: #d9d5d0; font-weight: 500; }
     .footer-mark { color: #c9c4bd; font-family: var(--serif); font-size: 16px; letter-spacing: .08em; }
-    .footer-resources {
-      padding-top: 15px;
-      padding-bottom: 15px;
-      border-top: 1px solid var(--line);
-      font-size: 11px;
-      letter-spacing: .08em;
-    }
-    .footer-resources a { color: #d9d5d0; text-decoration: underline; text-underline-offset: 4px; }
-    .footer-resources a:hover, .footer-resources a:focus-visible { color: #fff; }
     .validator-links {
       display: flex;
       align-items: center;
-      gap: 14px;
+      flex-wrap: wrap;
+      gap: 12px 18px;
       min-height: 60px;
+      padding-top: 8px;
+      padding-bottom: 8px;
       border-top: 1px solid var(--line);
     }
-    .validator-links a { display: inline-flex; align-items: center; }
+    .validator-links a { display: inline-flex; min-height: 44px; align-items: center; }
     .validator-links img { display: block; max-width: 88px; height: 31px; object-fit: contain; }
     .validator-links a:first-child img { width: 31px; }
+    .validator-links .citation-link {
+      color: #d9d5d0;
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+    .validator-links .citation-link:hover, .validator-links .citation-link:focus-visible { color: #fff; }
 
     @media (max-width: 760px) {
       .wrap { width: min(100% - 40px, 560px); }
